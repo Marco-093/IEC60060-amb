@@ -1,0 +1,229 @@
+import tkinter as tk
+
+# Definir la función que se ejecutará cuando se haga clic en el botón "Calcular"
+def calcular_suma():
+    # Obtener los valores ingresados en las casillas de entrada
+    valor1 = float(entry1.get())
+    valor2 = float(entry2.get())
+    valor3 = float(entry3.get())
+    valor4 = float(entry4.get())
+    valor5 = float(entry5.get())
+
+    # Obtener la opción seleccionada en el bullet
+    opcion = opciones.get()
+
+    # Calcular la suma de los valores de entrada
+    suma = valor1 + valor2 + valor3 + valor4 + valor5
+
+    # Mostrar la suma en la casilla de salida
+    output.config(state=tk.NORMAL)
+    output.delete(0, tk.END)
+    output.insert(tk.END, suma)
+    output.config(state=tk.DISABLED)
+
+# Crear la ventana principal
+ventana = tk.Tk()
+
+# Definir el título de la ventana
+ventana.title("Calculadora de Suma")
+
+# Crear las casillas de entrada
+entry1 = tk.Entry(ventana, width=10)
+entry1.grid(row=0, column=0, padx=5, pady=5)
+entry2 = tk.Entry(ventana, width=10)
+entry2.grid(row=1, column=0, padx=5, pady=5)
+entry3 = tk.Entry(ventana, width=10)
+entry3.grid(row=2, column=0, padx=5, pady=5)
+entry4 = tk.Entry(ventana, width=10)
+entry4.grid(row=3, column=0, padx=5, pady=5)
+entry5 = tk.Entry(ventana, width=10)
+entry5.grid(row=4, column=0, padx=5, pady=5)
+
+# Crear el bullet para seleccionar la opción
+opciones = tk.StringVar()
+opciones.set("AC")
+ac_button = tk.Radiobutton(ventana, text="AC", variable=opciones, value="AC")
+ac_button.grid(row=0, column=1, padx=5, pady=5)
+dc_button = tk.Radiobutton(ventana, text="DC", variable=opciones, value="DC")
+dc_button.grid(row=1, column=1, padx=5, pady=5)
+impulso_button = tk.Radiobutton(ventana, text="Impulso", variable=opciones, value="Impulso")
+impulso_button.grid(row=2, column=1, padx=5, pady=5)
+
+# Crear el botón "Calcular"
+calcular_button = tk.Button(ventana, text="Calcular", command=calcular_suma)
+calcular_button.grid(row=3, column=1, padx=5, pady=5)
+
+# Crear la casilla de salida
+output = tk.Entry(ventana, width=10, state=tk.DISABLED)
+output.grid(row=4, column=1, padx=5, pady=5)
+
+# Iniciar la ventana
+ventana.mainloop()
+
+
+
+
+
+
+
+
+import tkinter as tk
+
+class SumaApp:
+    def __init__(self, master):
+        self.master = master
+        master.title("Suma de valores")
+
+        # Valores por defecto
+        self.valor1 = tk.DoubleVar(value=1)
+        self.valor2 = tk.DoubleVar(value=1)
+        self.resultado = tk.DoubleVar(value=2)
+
+        # Crear entrada de valores
+        self.valor1_label = tk.Label(master, text="Valor 1:")
+        self.valor1_entry = tk.Entry(master, textvariable=self.valor1)
+        self.valor2_label = tk.Label(master, text="Valor 2:")
+        self.valor2_entry = tk.Entry(master, textvariable=self.valor2)
+
+        # Crear bullet para seleccionar la categoría
+        self.categoria_label = tk.Label(master, text="Categoría:")
+        self.categoria = tk.StringVar(value="AC")
+        self.ac_radio = tk.Radiobutton(master, text="AC", variable=self.categoria, value="AC", command=self.actualizar_resultado)
+        self.dc_radio = tk.Radiobutton(master, text="DC", variable=self.categoria, value="DC", command=self.actualizar_resultado)
+        self.impulso_radio = tk.Radiobutton(master, text="Impulso", variable=self.categoria, value="Impulso", command=self.actualizar_resultado)
+
+        # Crear salida de resultado
+        self.resultado_label = tk.Label(master, text="Resultado:")
+        self.resultado_entry = tk.Entry(master, textvariable=self.resultado, state="readonly")
+
+        # Ubicar los elementos en la ventana
+        self.valor1_label.grid(row=0, column=0)
+        self.valor1_entry.grid(row=0, column=1)
+        self.valor2_label.grid(row=1, column=0)
+        self.valor2_entry.grid(row=1, column=1)
+
+        self.categoria_label.grid(row=2, column=0)
+        self.ac_radio.grid(row=2, column=1)
+        self.dc_radio.grid(row=2, column=2)
+        self.impulso_radio.grid(row=2, column=3)
+
+        self.resultado_label.grid(row=3, column=0)
+        self.resultado_entry.grid(row=3, column=1)
+
+        # Actualizar resultado al modificar las entradas
+        self.valor1_entry.bind("<KeyRelease>", self.actualizar_resultado)
+        self.valor2_entry.bind("<KeyRelease>", self.actualizar_resultado)
+
+    def actualizar_resultado(self, event=None):
+        valor1 = self.valor1.get()
+        valor2 = self.valor2.get()
+        categoria = self.categoria.get()
+
+        resultado = valor1 + valor2
+
+        if categoria == "AC":
+            resultado *= 1.1
+        elif categoria == "DC":
+            resultado *= 0.9
+        else:
+            resultado *= 2
+
+        self.resultado.set(resultado)
+
+root = tk.Tk()
+app = SumaApp(root)
+root.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import tkinter as tk
+
+class SumaApp:
+    def __init__(self, master):
+        self.master = master
+        master.title("Suma de valores")
+
+        # Valores por defecto
+        self.valor1 = tk.DoubleVar(value=1)
+        self.valor2 = tk.DoubleVar(value=1)
+        self.resultado = tk.DoubleVar(value=2)
+
+        # Crear entrada de valores
+        self.valor1_label = tk.Label(master, text="Valor 1:")
+        self.valor1_entry = tk.Entry(master, textvariable=self.valor1)
+        self.valor2_label = tk.Label(master, text="Valor 2:")
+        self.valor2_entry = tk.Entry(master, textvariable=self.valor2)
+
+        # Crear bullet para seleccionar la categoría
+        self.categoria_label = tk.Label(master, text="Categoría:")
+        self.categoria = tk.StringVar(value="AC")
+        self.ac_radio = tk.Radiobutton(master, text="AC", variable=self.categoria, value="AC", command=self.actualizar_resultado)
+        self.dc_radio = tk.Radiobutton(master, text="DC", variable=self.categoria, value="DC", command=self.actualizar_resultado)
+        self.impulso_radio = tk.Radiobutton(master, text="Impulso", variable=self.categoria, value="Impulso", command=self.actualizar_resultado)
+
+        # Crear salida de resultado
+        self.resultado_label = tk.Label(master, text="Resultado:")
+        self.resultado_entry = tk.Entry(master, textvariable=self.resultado, state="readonly")
+
+        # Ubicar los elementos en la ventana
+        self.valor1_label.grid(row=0, column=0)
+        self.valor1_entry.grid(row=0, column=1)
+        self.valor2_label.grid(row=1, column=0)
+        self.valor2_entry.grid(row=1, column=1)
+
+        self.categoria_label.grid(row=2, column=0)
+        self.ac_radio.grid(row=2, column=1)
+        self.dc_radio.grid(row=2, column=2)
+        self.impulso_radio.grid(row=2, column=3)
+
+        self.resultado_label.grid(row=3, column=0)
+        self.resultado_entry.grid(row=3, column=1)
+
+        # Actualizar resultado al modificar las entradas
+        self.valor1_entry.bind("<KeyRelease>", self.actualizar_resultado)
+        self.valor2_entry.bind("<KeyRelease>", self.actualizar_resultado)
+
+    def actualizar_resultado(self, event=None):
+        valor1 = self.valor1.get()
+        valor2 = self.valor2.get()
+        categoria = self.categoria.get()
+
+        resultado = valor1 + valor2
+
+        if categoria == "AC":
+            resultado *= 1
+        elif categoria == "DC":
+            resultado *= 1
+        else:
+            resultado *= 1
+
+        self.resultado.set(0)
+
+
+        self.resultado.set(resultado)
+
+root = tk.Tk()
+app = SumaApp(root)
+root.mainloop()
+	
+
